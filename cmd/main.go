@@ -66,7 +66,7 @@ func main() {
 	}
 
 	if err = waitFunctionsProcesses(ctx, cluster, processes); err != nil {
-		log.Fatal("failed to wait function processes", "error", err.Error())
+		log.Fatal("failed to wait functions processes", "error", err.Error())
 	}
 
 	if err = action.Deploy(ctx, f.Name, cluster); err != nil {
