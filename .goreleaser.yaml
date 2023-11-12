@@ -1,3 +1,5 @@
+project_name: cbef
+
 version: 1
 
 before:
@@ -32,3 +34,7 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+
+dockers:
+  - image_templates: [ "ghcr.io/trendyol/{{ .ProjectName }}:{{ .Version }}-amd64" ]
+    dockerfile: ./build/docker/Dockerfile
