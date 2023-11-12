@@ -9,8 +9,8 @@ import (
 )
 
 // Status fetches the current status of all eventing functions.
-func Status(ctx context.Context, cluster *gocb.Cluster) (*gocb.EventingStatus, error) {
-	statuses, err := cluster.EventingFunctions().FunctionsStatus(&gocb.EventingFunctionsStatusOptions{
+func (a *action) Status(ctx context.Context) (*gocb.EventingStatus, error) {
+	statuses, err := a.cluster.EventingFunctions().FunctionsStatus(&gocb.EventingFunctionsStatusOptions{
 		Timeout:       10 * time.Second,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,

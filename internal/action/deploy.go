@@ -9,8 +9,8 @@ import (
 )
 
 // Deploy deploys an eventing function.
-func Deploy(ctx context.Context, name string, cluster *gocb.Cluster) error {
-	if err := cluster.EventingFunctions().DeployFunction(name, &gocb.DeployEventingFunctionOptions{
+func (a *action) Deploy(ctx context.Context, name string) error {
+	if err := a.cluster.EventingFunctions().DeployFunction(name, &gocb.DeployEventingFunctionOptions{
 		Timeout:       10 * time.Second,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,
