@@ -3,8 +3,9 @@ package action
 import (
 	"context"
 	"fmt"
-	"github.com/couchbase/gocb/v2"
 	"strings"
+
+	"github.com/couchbase/gocb/v2"
 )
 
 // StopFunctions stops eventing functions by given prefix.

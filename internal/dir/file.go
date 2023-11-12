@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// ReadFileFromPath reads file and parse into any model.
 func ReadFileFromPath[T any](path string) (*T, error) {
 	cfg, err := os.ReadFile(path)
 	if err != nil {
