@@ -2,6 +2,9 @@ FROM golang:1.21.4-alpine AS builder
 
 WORKDIR /build
 
+COPY go.mod go.sum ./
+RUN go mod download
+
 COPY . .
 
 ENV CGO_ENABLED=0
