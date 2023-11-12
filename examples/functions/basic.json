@@ -1,0 +1,18 @@
+{
+  "name": "basic",
+  "cluster": {
+    "connection_string": "couchbase://localhost",
+    "user": "foo",
+    "pass": "bar"
+  },
+  "source_keyspace": {
+    "bucket": "foo",
+    "scope": "_default",
+    "collection": "_default"
+  },
+  "metadata_keyspace": {
+    "bucket": "bar",
+    "scope": "_default",
+    "collection": "_default"
+  }
+}
