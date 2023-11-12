@@ -3,10 +3,12 @@ package couchbase
 import (
 	"context"
 	"fmt"
+
 	"github.com/couchbase/gocb/v2"
 	"github.com/trendyol/cbef/internal/model"
 )
 
+// Connect connects an couchbase cluster.
 func Connect(ctx context.Context, cfg model.Cluster) (*gocb.Cluster, error) {
 	cluster, err := gocb.Connect(cfg.ConnectionString, gocb.ClusterOptions{
 		Username: cfg.User,

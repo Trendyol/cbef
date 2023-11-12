@@ -3,8 +3,9 @@ package action
 import (
 	"context"
 	"fmt"
-	"github.com/couchbase/gocb/v2"
 	"time"
+
+	"github.com/couchbase/gocb/v2"
 )
 
 // WaitFunctionsProcesses waits processes for provided eventing functions.

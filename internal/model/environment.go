@@ -15,6 +15,7 @@ type Environment struct {
 	ExecutionTimeout time.Duration
 }
 
+// NewEnvironment creates a Environment struct via environment vriables.
 func NewEnvironment() (*Environment, error) {
 	e := &Environment{}
 	if err := e.fill(); err != nil {
