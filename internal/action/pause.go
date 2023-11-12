@@ -9,8 +9,8 @@ import (
 )
 
 // Pause pauses an eventing function.
-func Pause(ctx context.Context, name string, cluster *gocb.Cluster) error {
-	if err := cluster.EventingFunctions().PauseFunction(name, &gocb.PauseEventingFunctionOptions{
+func (a *action) Pause(ctx context.Context, name string) error {
+	if err := a.cluster.EventingFunctions().PauseFunction(name, &gocb.PauseEventingFunctionOptions{
 		Timeout:       10 * time.Second,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,

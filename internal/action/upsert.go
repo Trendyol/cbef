@@ -10,7 +10,7 @@ import (
 )
 
 // Upsert inserts or updates an eventing function.
-func Upsert(ctx context.Context, f model.Function, cluster *gocb.Cluster) error {
+func (a *action) Upsert(ctx context.Context, f *model.Function) error {
 	s := gocb.EventingFunction{
 		Name:               f.Name,
 		Code:               f.Code,
@@ -112,7 +112,7 @@ func Upsert(ctx context.Context, f model.Function, cluster *gocb.Cluster) error 
 		})
 	}
 
-	if err := cluster.EventingFunctions().UpsertFunction(s, &gocb.UpsertEventingFunctionOptions{
+	if err := a.cluster.EventingFunctions().UpsertFunction(s, &gocb.UpsertEventingFunctionOptions{
 		Timeout:       10 * time.Second,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,

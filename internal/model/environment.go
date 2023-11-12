@@ -15,8 +15,21 @@ type Environment struct {
 	ExecutionTimeout time.Duration
 }
 
-// Fill fills and validates Environment struct via environment variables.
-func (e *Environment) Fill() error {
+func NewEnvironment() (*Environment, error) {
+	e := &Environment{}
+	if err := e.fill(); err != nil {
+		return nil, fmt.Errorf("fill environment variables: %s", err.Error())
+	}
+
+	if err := e.validate(); err != nil {
+		return nil, fmt.Errorf("validate environment variables: %s", err.Error())
+	}
+
+	return e, nil
+}
+
+// fill fills and validates Environment struct via environment variables.
+func (e *Environment) fill() error {
 	e.ConfigFile = os.Getenv("CONFIG_FILE")
 	e.FunctionFile = os.Getenv("FUNCTION_FILE")
 	e.CommitSHA = os.Getenv("CI_COMMIT_SHORT_SHA")
@@ -32,7 +45,7 @@ func (e *Environment) Fill() error {
 
 	e.ExecutionTimeout = t
 
-	return e.validate()
+	return nil
 }
 
 // validate validates provided environment variable requirements.
