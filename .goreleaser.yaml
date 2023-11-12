@@ -37,4 +37,4 @@ changelog:
 
 dockers:
   - image_templates: [ "ghcr.io/trendyol/{{ .ProjectName }}:{{ .Version }}-amd64" ]
-    dockerfile: ./build/docker/Dockerfile
+    dockerfile: ./build/docker/Dockerfile.goreleaser
