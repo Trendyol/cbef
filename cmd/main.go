@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
+
 	"github.com/trendyol/cbef/internal/action"
 	"github.com/trendyol/cbef/internal/couchbase"
 	"github.com/trendyol/cbef/internal/dir"
 	"github.com/trendyol/cbef/internal/logger"
 	"github.com/trendyol/cbef/internal/model"
-	"os"
 )
 
 func main() {
@@ -51,8 +52,8 @@ func main() {
 	if err != nil {
 		log.Fatal("failed to stop functions", "error", err.Error())
 	}
-  
-  if err = act.WaitFunctionsProcesses(ctx, processes); err != nil {
+
+	if err = act.WaitFunctionsProcesses(ctx, processes); err != nil {
 		log.Fatal("failed to wait functions processes", "error", err.Error())
 	}
 
