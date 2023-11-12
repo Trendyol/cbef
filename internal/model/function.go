@@ -2,6 +2,7 @@ package model
 
 import "time"
 
+// Function represents eventing function structure.
 type Function struct {
 	Cluster            Cluster           `json:"cluster"`
 	Name               string            `json:"name"`
@@ -18,24 +19,28 @@ type Function struct {
 	Settings           Settings          `json:"settings"`
 }
 
+// Cluster represents couchbase connection information.
 type Cluster struct {
 	ConnectionString string `json:"connection_string"`
 	User             string `json:"user"`
 	Pass             string `json:"pass"`
 }
 
+// Keyspace represents a triple of bucket, collection, and scope names.
 type Keyspace struct {
 	Bucket     string `json:"bucket"`
 	Scope      string `json:"scope"`
 	Collection string `json:"collection"`
 }
 
+// BucketBinding represents an eventing function binding allowing the function access to buckets, scopes, and collections.
 type BucketBinding struct {
 	Alias  string   `json:"alias"`
 	Name   Keyspace `json:"name"`
 	Access string   `json:"access"`
 }
 
+// URLBinding represents an eventing function binding allowing the function access external resources via cURL.
 type URLBinding struct {
 	Hostname               string `json:"hostname"`
 	Alias                  string `json:"alias"`
@@ -44,6 +49,7 @@ type URLBinding struct {
 	ValidateSSLCertificate bool   `json:"validate_ssl_certificate"`
 }
 
+// Auth represents an URLBinding authentication method for an eventing function.
 type Auth struct {
 	Type  string `json:"type"`
 	User  string `json:"user"`
@@ -51,11 +57,13 @@ type Auth struct {
 	Token string `json:"token"`
 }
 
+// ConstantBinding represents an eventing function binding allowing the function to utilize global variables.
 type ConstantBinding struct {
 	Alias   string `json:"alias"`
 	Literal string `json:"literal"`
 }
 
+// Settings are the settings for a Function.
 type Settings struct {
 	CPPWorkerThreadCount   int           `json:"cpp_worker_thread_count"`
 	DCPStreamBoundary      string        `json:"dcp_stream_boundary"`

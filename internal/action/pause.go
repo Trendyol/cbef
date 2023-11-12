@@ -8,6 +8,7 @@ import (
 	"github.com/couchbase/gocb/v2"
 )
 
+// Pause pauses an eventing function.
 func Pause(ctx context.Context, name string, cluster *gocb.Cluster) error {
 	if err := cluster.EventingFunctions().PauseFunction(name, &gocb.PauseEventingFunctionOptions{
 		Timeout:       10 * time.Second,

@@ -9,6 +9,7 @@ import (
 	"github.com/trendyol/cbef/internal/model"
 )
 
+// Upsert inserts or updates an eventing function.
 func Upsert(ctx context.Context, f model.Function, cluster *gocb.Cluster) error {
 	s := gocb.EventingFunction{
 		Name:               f.Name,

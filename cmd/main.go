@@ -74,10 +74,11 @@ func main() {
 	}
 }
 
+// stopFunctions stops eventing functions with prefix.
 func stopFunctions(ctx context.Context, cluster *gocb.Cluster, prefix, excludedFunction string) (map[string]struct{}, error) {
 	statuses, err := action.Status(ctx, cluster)
 	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve functions statuses: %w", err)
+		return nil, fmt.Errorf("failed to fetch functions statuses: %w", err)
 	}
 
 	processes := make(map[string]struct{})
@@ -111,6 +112,7 @@ func stopFunctions(ctx context.Context, cluster *gocb.Cluster, prefix, excludedF
 	return processes, nil
 }
 
+// waitFunctionsProcesses waits processes for provided eventing functions.
 func waitFunctionsProcesses(ctx context.Context, cluster *gocb.Cluster, functions map[string]struct{}) error {
 	t := time.Tick(500 * time.Millisecond)
 	for range t {
@@ -120,7 +122,7 @@ func waitFunctionsProcesses(ctx context.Context, cluster *gocb.Cluster, function
 
 		statuses, err := action.Status(ctx, cluster)
 		if err != nil {
-			return fmt.Errorf("failed to retrieve functions statuses: %w", err)
+			return fmt.Errorf("failed to fetch functions statuses: %w", err)
 		}
 
 		for _, fn := range statuses.Functions {

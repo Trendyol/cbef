@@ -8,6 +8,7 @@ import (
 	"github.com/couchbase/gocb/v2"
 )
 
+// Undeploy undeploys an eventing function.
 func Undeploy(ctx context.Context, name string, cluster *gocb.Cluster) error {
 	if err := cluster.EventingFunctions().UndeployFunction(name, &gocb.UndeployEventingFunctionOptions{
 		Timeout:       10 * time.Second,

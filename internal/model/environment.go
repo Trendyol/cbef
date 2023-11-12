@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Environment represents application configurations.
 type Environment struct {
 	ConfigFile       string
 	FunctionFile     string
@@ -14,6 +15,7 @@ type Environment struct {
 	ExecutionTimeout time.Duration
 }
 
+// Fill fills and validates Environment struct via environment variables.
 func (e *Environment) Fill() error {
 	e.ConfigFile = os.Getenv("CONFIG_FILE")
 	e.FunctionFile = os.Getenv("FUNCTION_FILE")
@@ -33,6 +35,7 @@ func (e *Environment) Fill() error {
 	return e.validate()
 }
 
+// validate validates provided environment variable requirements.
 func (e *Environment) validate() error {
 	if len(e.ConfigFile) == 0 {
 		return errors.New("environment variable 'CONFIG_FILE' does not provided")

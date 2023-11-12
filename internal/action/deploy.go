@@ -8,6 +8,7 @@ import (
 	"github.com/couchbase/gocb/v2"
 )
 
+// Deploy deploys an eventing function.
 func Deploy(ctx context.Context, name string, cluster *gocb.Cluster) error {
 	if err := cluster.EventingFunctions().DeployFunction(name, &gocb.DeployEventingFunctionOptions{
 		Timeout:       10 * time.Second,
