@@ -51,9 +51,9 @@ func main() {
 	if err != nil {
 		log.Fatal("failed to stop functions", "error", err.Error())
 	}
-
-	if err = act.WaitFunctionsProcesses(ctx, processes); err != nil {
-		log.Fatal("failed to wait function processes", "error", err.Error())
+  
+  if err = act.WaitFunctionsProcesses(ctx, processes); err != nil {
+		log.Fatal("failed to wait functions processes", "error", err.Error())
 	}
 
 	if err = act.Deploy(ctx, f.Name); err != nil {
