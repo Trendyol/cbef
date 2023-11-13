@@ -39,7 +39,7 @@ func main() {
 		log.Fatal("failed to read function file", "error", err.Error())
 	}
 
-	f.Code = fmt.Sprintf("// Created by %s on %s via cbef.\n%s", env.CommitAuthor, time.Now().Format(time.DateTime), code)
+	f.Code = fmt.Sprintf("// Created by %s on %s via github.com/trendyol/cbef.\n\n%s", env.CommitAuthor, time.Now().Format(time.DateTime), code)
 	name := f.Name
 	f.Name = fmt.Sprintf("%s-%s", f.Name, env.CommitSHA)
 
