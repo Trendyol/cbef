@@ -1,3 +1,4 @@
 FROM alpine:latest
+WORKDIR /
 ENTRYPOINT ["/cbef"]
 COPY cbef /
