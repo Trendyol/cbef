@@ -9,6 +9,8 @@
 ### Quickstart
 
 #### Local
+> Precompiled cbef for all arch types is available in the [releases](https://github.com/trendyol/cbef/releases) page.
+
 Clone the `cbef` repository from the given GitHub URL
 ```bash
 git clone https://github.com/trendyol/cbef
