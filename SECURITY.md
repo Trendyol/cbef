@@ -12,4 +12,4 @@ Make sure you always use stable and security supported versions.
 
 ## Reporting a Vulnerability
 
-If you encounter any security issues, please do not hesitate to create a new [issue](https://github.com/trendyol/cbef/issues/new).
+If you encounter any security issues, please do not hesitate to create a new [issue](https://github.com/trendyol/cbef/issues/new) with `security` label.
