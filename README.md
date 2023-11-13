@@ -7,11 +7,10 @@
 `cbef` is a simple, gitops and testing capability provider for [Couchbase eventing functions](https://www.couchbase.com/products/eventing/).
 
 ### Table of Contents
-- [cbef (Couchbase Eventing Functions)](#cbef-couchbase-eventing-functions)
-	- [Why?](#why)
-	- [Quickstart](#quickstart)
-		- [Local](#local)
-	- [Function Configurations](#function-configurations)
+- [Why?](#why)
+- [Quickstart](#quickstart)
+  - [Local](#local)
+- [Function Configurations](#function-configurations)
 
 ### Why?
 In production projects where code reliability is a key consideration, it is essential to control and review the implemented processes using Git.
