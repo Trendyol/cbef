@@ -39,6 +39,7 @@ Update function file
 ```bash
 nano ./examples/functions/basic.js
 ```
+> If you need to example eventing functions code, click [here](https://docs.couchbase.com/server/current/eventing/eventing-examples.html) to read official Couchbase documentation.
 
 Download dependencies
 ```bash
@@ -121,5 +122,3 @@ go run ./cmd
 | settings.language_compatibility          | Language compatibility of the function                       |    string    |    ❌     | 6.0.0, 6.5.0, 6.6.2                |
 | settings.execution_timeout               | Time after which the function's execution will be timed out  |     uint     |    ❌     |                                    |
 | settings.timer_context_size              | Maximum allowed value of the timer context size in bytes     |     uint     |    ❌     |                                    |
-
-> If you need to example eventing functions code, click [here](https://docs.couchbase.com/server/current/eventing/eventing-examples.html) to read official Couchbase documentation.
