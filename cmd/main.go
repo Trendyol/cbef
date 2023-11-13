@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/trendyol/cbef/internal/action"
 	"github.com/trendyol/cbef/internal/couchbase"
@@ -38,7 +39,7 @@ func main() {
 		log.Fatal("failed to read function file", "error", err.Error())
 	}
 
-	f.Code = string(code)
+	f.Code = fmt.Sprintf("// Created by %s on %s via cbef.\n%s", env.CommitAuthor, time.Now().Format(time.DateTime), code)
 	name := f.Name
 	f.Name = fmt.Sprintf("%s-%s", f.Name, env.CommitSHA)
 
