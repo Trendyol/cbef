@@ -3,7 +3,6 @@ package action
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/couchbase/gocb/v2"
 )
@@ -11,7 +10,7 @@ import (
 // Pause pauses an eventing function.
 func (a *action) Pause(ctx context.Context, name string) error {
 	if err := a.cluster.EventingFunctions().PauseFunction(name, &gocb.PauseEventingFunctionOptions{
-		Timeout:       10 * time.Second,
+		Timeout:       a.timeout,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,
 	}); err != nil {

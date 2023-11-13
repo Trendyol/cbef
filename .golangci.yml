@@ -1,0 +1,33 @@
+linters:
+  enable-all: true
+  disable:
+    - exhaustruct
+    - ireturn
+    - varnamelen
+    - deadcode
+    - exhaustivestruct
+    - golint
+    - ifshort
+    - interfacer
+    - maligned
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - varcheck
+    - tagliatelle
+    - goerr113
+    - lll
+linters-settings:
+  depguard:
+    rules:
+      main:
+        allow:
+          - $gostd
+          - github.com/trendyol/cbef
+          - github.com/couchbase/gocb
+  funlen:
+    lines: 85
+  gocognit:
+    min-complexity: 35
+  cyclop:
+    max-complexity: 12

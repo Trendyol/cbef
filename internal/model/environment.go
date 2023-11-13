@@ -37,6 +37,7 @@ func (e *Environment) fill() error {
 	e.CommitSHA = os.Getenv("CI_COMMIT_SHORT_SHA")
 	e.CommitAuthor = os.Getenv("CI_COMMIT_AUTHOR")
 	timeout := os.Getenv("EXECUTION_TIMEOUT")
+
 	if len(timeout) == 0 {
 		timeout = "3m"
 	}

@@ -10,7 +10,7 @@ import (
 )
 
 // Connect connects an couchbase cluster.
-func Connect(ctx context.Context, cfg model.Cluster) (*gocb.Cluster, error) {
+func Connect(ctx context.Context, timeout time.Duration, cfg model.Cluster) (*gocb.Cluster, error) {
 	cluster, err := gocb.Connect(cfg.ConnectionString, gocb.ClusterOptions{
 		Username: cfg.User,
 		Password: cfg.Pass,
@@ -19,7 +19,7 @@ func Connect(ctx context.Context, cfg model.Cluster) (*gocb.Cluster, error) {
 		return nil, fmt.Errorf("failed to connect couchbase: %s", err.Error())
 	}
 
-	res, err := cluster.Ping(&gocb.PingOptions{Timeout: 5 * time.Second, Context: ctx})
+	res, err := cluster.Ping(&gocb.PingOptions{Timeout: timeout, Context: ctx})
 	if err != nil {
 		return nil, fmt.Errorf("failed to ping couchbase: %s", err.Error())
 	}

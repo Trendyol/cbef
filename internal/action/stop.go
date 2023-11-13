@@ -17,6 +17,7 @@ func (a *action) StopFunctions(ctx context.Context, prefix, excludedFunction str
 
 	processes := make(map[string]struct{})
 	drainableFunctions := make(map[string]struct{})
+
 	for _, fn := range statuses.Functions {
 		if fn.Name == excludedFunction {
 			continue

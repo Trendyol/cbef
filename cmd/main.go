@@ -13,6 +13,13 @@ import (
 	"github.com/trendyol/cbef/internal/model"
 )
 
+const (
+	connectTimeout   = 5 * time.Second
+	processTimeout   = 10 * time.Second
+	processTickDelay = 500 * time.Millisecond
+	codeAuditComment = "// Created by %s on %s via github.com/trendyol/cbef.\n\n%s"
+)
+
 func main() {
 	log := logger.New()
 
@@ -29,9 +36,9 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), env.ExecutionTimeout)
 	defer cancel()
 
-	cluster, err := couchbase.Connect(ctx, f.Cluster)
+	cluster, err := couchbase.Connect(ctx, connectTimeout, f.Cluster)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal(err.Error()) //nolint:gocritic
 	}
 
 	code, err := os.ReadFile(env.FunctionFile)
@@ -39,11 +46,11 @@ func main() {
 		log.Fatal("failed to read function file", "error", err.Error())
 	}
 
-	f.Code = fmt.Sprintf("// Created by %s on %s via github.com/trendyol/cbef.\n\n%s", env.CommitAuthor, time.Now().Format(time.DateTime), code)
+	f.Code = fmt.Sprintf(codeAuditComment, env.CommitAuthor, time.Now().Format(time.DateTime), code)
 	name := f.Name
 	f.Name = fmt.Sprintf("%s-%s", f.Name, env.CommitSHA)
 
-	act := action.NewAction(cluster)
+	act := action.NewAction(cluster, processTimeout)
 
 	if err = act.Upsert(ctx, f); err != nil {
 		log.Fatal("failed to create function", "error", err.Error(), "function", f.Name)
@@ -54,7 +61,7 @@ func main() {
 		log.Fatal("failed to stop functions", "error", err.Error())
 	}
 
-	if err = act.WaitFunctionsProcesses(ctx, processes); err != nil {
+	if err = act.WaitFunctionsProcesses(ctx, processTickDelay, processes); err != nil {
 		log.Fatal("failed to wait functions processes", "error", err.Error())
 	}
 
@@ -62,7 +69,7 @@ func main() {
 		log.Fatal("failed to deploy function", "error", err.Error(), "function", f.Name)
 	}
 
-	if err = act.DrainFunctions(ctx, drainableFunctions); err != nil {
+	if err = act.DrainFunctions(ctx, processTickDelay, drainableFunctions); err != nil {
 		log.Fatal("failed to drain functions", "error", err.Error())
 	}
 }

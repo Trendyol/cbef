@@ -9,9 +9,11 @@ import (
 )
 
 // WaitFunctionsProcesses waits processes for provided eventing functions.
-func (a *action) WaitFunctionsProcesses(ctx context.Context, functions map[string]struct{}) error {
-	t := time.Tick(500 * time.Millisecond)
-	for range t {
+func (a *action) WaitFunctionsProcesses(ctx context.Context, tickDelay time.Duration, functions map[string]struct{}) error {
+	t := time.NewTicker(tickDelay)
+	defer t.Stop()
+
+	for range t.C {
 		if len(functions) == 0 {
 			break
 		}

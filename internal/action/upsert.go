@@ -3,7 +3,6 @@ package action
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/couchbase/gocb/v2"
 	"github.com/trendyol/cbef/internal/model"
@@ -88,7 +87,7 @@ func (a *action) Upsert(ctx context.Context, f *model.Function) error {
 	}
 
 	if err := a.cluster.EventingFunctions().UpsertFunction(s, &gocb.UpsertEventingFunctionOptions{
-		Timeout:       10 * time.Second,
+		Timeout:       a.timeout,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,
 	}); err != nil {

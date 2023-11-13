@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-// Logger records structured log informations
+// Logger records structured log information's.
 type Logger struct {
 	*slog.Logger
 }
@@ -22,6 +22,6 @@ func New() *Logger {
 
 // Fatal logs fatal reasons with exit.
 func (l *Logger) Fatal(msg string, args ...any) {
-	l.Error(msg, args)
+	l.Error(msg, args) //nolint:all
 	os.Exit(1)
 }

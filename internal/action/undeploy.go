@@ -3,7 +3,6 @@ package action
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/couchbase/gocb/v2"
 )
@@ -11,7 +10,7 @@ import (
 // Undeploy undeploys an eventing function.
 func (a *action) Undeploy(ctx context.Context, name string) error {
 	if err := a.cluster.EventingFunctions().UndeployFunction(name, &gocb.UndeployEventingFunctionOptions{
-		Timeout:       10 * time.Second,
+		Timeout:       a.timeout,
 		RetryStrategy: gocb.NewBestEffortRetryStrategy(nil),
 		Context:       ctx,
 	}); err != nil {

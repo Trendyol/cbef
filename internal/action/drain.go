@@ -9,9 +9,11 @@ import (
 )
 
 // DrainFunctions drains eventing functions.
-func (a *action) DrainFunctions(ctx context.Context, functions map[string]struct{}) error {
-	t := time.Tick(500 * time.Millisecond)
-	for range t {
+func (a *action) DrainFunctions(ctx context.Context, tickDelay time.Duration, functions map[string]struct{}) error {
+	t := time.NewTicker(tickDelay)
+	defer t.Stop()
+
+	for range t.C {
 		if len(functions) == 0 {
 			break
 		}
@@ -23,6 +25,7 @@ func (a *action) DrainFunctions(ctx context.Context, functions map[string]struct
 
 		for name := range functions {
 			var found bool
+
 			for _, f := range statuses.Functions {
 				if f.Name != name {
 					continue
