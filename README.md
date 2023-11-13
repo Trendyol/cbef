@@ -21,6 +21,16 @@ Change the current working directory to the `cbef` directory
 cd cbef
 ```
 
+Update function settings
+```bash
+nano ./examples/functions/basic.json
+```
+
+Update function file
+```bash
+nano ./examples/functions/basic.js
+```
+
 Download dependencies
 ```bash
 go mod tidy
