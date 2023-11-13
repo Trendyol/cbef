@@ -14,8 +14,6 @@ RUN go build -o cbef ./cmd/main.go
 
 FROM alpine:latest
 
-WORKDIR /
-
 COPY --from=builder /build/cbef .
 
 CMD ["./cbef"]
