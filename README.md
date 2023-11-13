@@ -25,7 +25,7 @@ In contrast to operations carried out through the UI, transitioning to a new fun
 ## Quickstart
 
 ### Local
-> Precompiled cbef for all arch types is available in the [releases](https://github.com/trendyol/cbef/releases) page.
+> Note: Precompiled cbef for all arch types is available in the [releases](https://github.com/trendyol/cbef/releases) page.
 
 Clone the `cbef` repository from the given GitHub URL
 ```bash
@@ -46,7 +46,7 @@ Update function file
 ```bash
 nano ./examples/functions/basic.js
 ```
-> If you need to example eventing functions code, click [here](https://docs.couchbase.com/server/current/eventing/eventing-examples.html) to read official Couchbase documentation.
+> Note: If you need to example eventing functions code, click [here](https://docs.couchbase.com/server/current/eventing/eventing-examples.html) to read official Couchbase documentation.
 
 Download dependencies
 ```bash
@@ -84,10 +84,16 @@ go run ./cmd
 ```
 
 ### Docker
+Pull latest image
 ```bash
 docker pull ghcr.io/trendyol/cbef:latest-amd64
 ```
-> All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
+
+Run latest image
+```bash
+docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:latest-amd64
+```
+> Note: All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
 
 ## Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
