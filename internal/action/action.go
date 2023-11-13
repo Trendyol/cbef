@@ -14,8 +14,10 @@ type Action interface {
 	Pause(ctx context.Context, name string) error
 	Deploy(ctx context.Context, name string) error
 	Undeploy(ctx context.Context, name string) error
-	StopFunctions(ctx context.Context, prefix, excludedFunction string) (map[string]struct{}, error)
+	StopFunctions(ctx context.Context, prefix, excludedFunction string) (map[string]struct{}, map[string]struct{}, error)
 	WaitFunctionsProcesses(ctx context.Context, functions map[string]struct{}) error
+	DrainFunctions(ctx context.Context, functions map[string]struct{}) error
+	Drop(ctx context.Context, name string) error
 }
 
 // Action represents eventing function Action instance.

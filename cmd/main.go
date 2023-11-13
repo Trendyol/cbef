@@ -48,7 +48,7 @@ func main() {
 		log.Fatal("failed to create function", "error", err.Error(), "function", f.Name)
 	}
 
-	processes, err := act.StopFunctions(ctx, name, f.Name)
+	processes, drainableFunctions, err := act.StopFunctions(ctx, name, f.Name)
 	if err != nil {
 		log.Fatal("failed to stop functions", "error", err.Error())
 	}
@@ -59,5 +59,9 @@ func main() {
 
 	if err = act.Deploy(ctx, f.Name); err != nil {
 		log.Fatal("failed to deploy function", "error", err.Error(), "function", f.Name)
+	}
+
+	if err = act.DrainFunctions(ctx, drainableFunctions); err != nil {
+		log.Fatal("failed to drain functions", "error", err.Error())
 	}
 }
