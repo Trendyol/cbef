@@ -12,7 +12,7 @@ ENV GOARCH=${TARGETARCH}
 
 RUN go build -o cbef ./cmd/main.go
 
-FROM scratch
+FROM alpine:latest
 
 COPY --from=builder /build/cbef .
 
