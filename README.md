@@ -6,13 +6,14 @@
 
 `cbef` is a simple, gitops and testing capability provider for [Couchbase eventing functions](https://www.couchbase.com/products/eventing/).
 
-### Table of Contents
+## Table of Contents
 - [Why?](#why)
 - [Quickstart](#quickstart)
   - [Local](#local)
+  - [Docker](#docker)
 - [Function Configurations](#function-configurations)
 
-### Why?
+## Why?
 In production projects where code reliability is a key consideration, it is essential to control and review the implemented processes using Git.
 
 `cbef` facilitates GitOps support for the operations performed within eventing functions.
@@ -21,9 +22,9 @@ Moreover, to ensure the seamless functionality of eventing functions before depl
 
 In contrast to operations carried out through the UI, transitioning to a new function version is designed to be zero-downtime, allowing for rapid rollback if needed. The inclusion of revision history support further enhances the ability to track and manage changes effectively.
 
-### Quickstart
+## Quickstart
 
-#### Local
+### Local
 > Precompiled cbef for all arch types is available in the [releases](https://github.com/trendyol/cbef/releases) page.
 
 Clone the `cbef` repository from the given GitHub URL
@@ -81,6 +82,12 @@ Run the Go program located in the `cmd` directory
 ```bash
 go run ./cmd
 ```
+
+### Docker
+```bash
+docker pull ghcr.io/trendyol/cbef:latest-amd64
+```
+> All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
 
 ### Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
