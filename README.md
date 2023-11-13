@@ -89,7 +89,7 @@ docker pull ghcr.io/trendyol/cbef:latest-amd64
 ```
 > All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
 
-### Function Configurations
+## Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
 
 | Field                                    | Description                                                  |  Value Type  | Required | Options                            |
