@@ -3,6 +3,7 @@ package couchbase
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/couchbase/gocb/v2"
 	"github.com/trendyol/cbef/internal/model"
@@ -18,8 +19,17 @@ func Connect(ctx context.Context, cfg model.Cluster) (*gocb.Cluster, error) {
 		return nil, fmt.Errorf("failed to connect couchbase: %s", err.Error())
 	}
 
-	if _, err = cluster.Ping(&gocb.PingOptions{Context: ctx}); err != nil {
+	res, err := cluster.Ping(&gocb.PingOptions{Timeout: 5 * time.Second, Context: ctx})
+	if err != nil {
 		return nil, fmt.Errorf("failed to ping couchbase: %s", err.Error())
+	}
+
+	for _, reports := range res.Services {
+		for _, report := range reports {
+			if len(report.Error) > 0 {
+				return nil, fmt.Errorf("failed to ping couchbase: %s", report.Error)
+			}
+		}
 	}
 
 	return cluster, nil
