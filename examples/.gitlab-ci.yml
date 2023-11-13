@@ -1,0 +1,2 @@
+include:
+  - remote: https://github.com/Trendyol/cbef/blob/main/build/ci/.gitlab-ci.yml
