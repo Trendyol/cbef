@@ -1,3 +1,3 @@
-FROM alpine:latest
+FROM scratch
 ENTRYPOINT ["/cbef"]
 COPY cbef /
