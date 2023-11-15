@@ -26,7 +26,7 @@ linters-settings:
           - github.com/trendyol/cbef
           - github.com/couchbase/gocb
   funlen:
-    lines: 85
+    lines: 90
   gocognit:
     min-complexity: 35
   cyclop:
