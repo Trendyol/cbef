@@ -32,6 +32,8 @@ func (a *action) Upsert(ctx context.Context, f *model.Function) error {
 			LanguageCompatibility: gocb.EventingFunctionLanguageCompatibility(f.Settings.LanguageCompatibility),
 			ExecutionTimeout:      f.Settings.ExecutionTimeout,
 			TimerContextSize:      int(f.Settings.TimerContextSize),
+			DeploymentStatus:      gocb.EventingFunctionDeploymentStatusDeployed,
+			ProcessingStatus:      gocb.EventingFunctionProcessingStatusRunning,
 		},
 	}
 

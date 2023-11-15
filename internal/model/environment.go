@@ -11,7 +11,6 @@ import (
 type Environment struct {
 	ConfigFile       string
 	FunctionFile     string
-	CommitSHA        string
 	ExecutionTimeout time.Duration
 	CommitAuthor     string
 }
@@ -34,7 +33,6 @@ func NewEnvironment() (*Environment, error) {
 func (e *Environment) fill() error {
 	e.ConfigFile = os.Getenv("CONFIG_FILE")
 	e.FunctionFile = os.Getenv("FUNCTION_FILE")
-	e.CommitSHA = os.Getenv("CI_COMMIT_SHORT_SHA")
 	e.CommitAuthor = os.Getenv("CI_COMMIT_AUTHOR")
 	timeout := os.Getenv("EXECUTION_TIMEOUT")
 
@@ -60,10 +58,6 @@ func (e *Environment) validate() error {
 
 	if len(e.FunctionFile) == 0 {
 		return errors.New("environment variable 'FUNCTION_FILE' does not provided")
-	}
-
-	if len(e.CommitSHA) == 0 {
-		return errors.New("environment variable 'CI_COMMIT_SHORT_SHA' does not provided")
 	}
 
 	if len(e.CommitAuthor) == 0 {

@@ -16,12 +16,12 @@ func Connect(ctx context.Context, timeout time.Duration, cfg model.Cluster) (*go
 		Password: cfg.Pass,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("failed to connect couchbase: %s", err.Error())
+		return nil, fmt.Errorf("failed to connect couchbase: %w", err)
 	}
 
 	res, err := cluster.Ping(&gocb.PingOptions{Timeout: timeout, Context: ctx})
 	if err != nil {
-		return nil, fmt.Errorf("failed to ping couchbase: %s", err.Error())
+		return nil, fmt.Errorf("failed to ping couchbase: %w", err)
 	}
 
 	for _, reports := range res.Services {

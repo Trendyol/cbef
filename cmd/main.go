@@ -16,7 +16,6 @@ import (
 const (
 	connectTimeout   = 5 * time.Second
 	processTimeout   = 10 * time.Second
-	processTickDelay = 500 * time.Millisecond
 	codeAuditComment = "// Created by %s on %s via github.com/trendyol/cbef.\n\n%s"
 )
 
@@ -47,29 +46,21 @@ func main() {
 	}
 
 	f.Code = fmt.Sprintf(codeAuditComment, env.CommitAuthor, time.Now().Format(time.DateTime), code)
-	name := f.Name
-	f.Name = fmt.Sprintf("%s-%s", f.Name, env.CommitSHA)
 
 	act := action.NewAction(cluster, processTimeout)
 
-	if err = act.Upsert(ctx, f); err != nil {
-		log.Fatal("failed to create function", "error", err.Error(), "function", f.Name)
-	}
-
-	processes, drainableFunctions, err := act.StopFunctions(ctx, name, f.Name)
+	fn, err := act.Get(ctx, f.Name)
 	if err != nil {
-		log.Fatal("failed to stop functions", "error", err.Error())
+		log.Fatal("failed to get function", "error", err.Error())
 	}
 
-	if err = act.WaitFunctionsProcesses(ctx, processTickDelay, processes); err != nil {
-		log.Fatal("failed to wait functions processes", "error", err.Error())
+	if fn != nil && fn.Settings.ProcessingStatus {
+		if err = act.Pause(ctx, f.Name); err != nil {
+			log.Fatal("failed to pause function", "error", err.Error())
+		}
 	}
 
-	if err = act.Deploy(ctx, f.Name); err != nil {
-		log.Fatal("failed to deploy function", "error", err.Error(), "function", f.Name)
-	}
-
-	if err = act.DrainFunctions(ctx, processTickDelay, drainableFunctions); err != nil {
-		log.Fatal("failed to drain functions", "error", err.Error())
+	if err = act.Upsert(ctx, f); err != nil {
+		log.Fatal("failed to upsert function", "error", err.Error(), "function", f.Name)
 	}
 }
