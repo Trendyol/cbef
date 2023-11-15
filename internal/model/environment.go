@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -65,4 +66,17 @@ func (e *Environment) validate() error {
 	}
 
 	return nil
+}
+
+// FillStringFromEnvironment converts string to environment variable.
+func FillStringFromEnvironment(s string) string {
+	if strings.HasPrefix(s, "{{") && strings.HasSuffix(s, "}}") {
+		s = strings.TrimPrefix(s, "{{")
+		s = strings.TrimSuffix(s, "}}")
+		s = os.Getenv(s)
+
+		return s
+	}
+
+	return ""
 }

@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/trendyol/cbef/internal/action"
+	"github.com/trendyol/cbef/internal/config"
 	"github.com/trendyol/cbef/internal/couchbase"
-	"github.com/trendyol/cbef/internal/dir"
 	"github.com/trendyol/cbef/internal/logger"
 	"github.com/trendyol/cbef/internal/model"
 )
@@ -27,7 +27,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	f, err := dir.ReadFileFromPath[model.Function](env.ConfigFile)
+	f, err := config.Parse(env.ConfigFile)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
