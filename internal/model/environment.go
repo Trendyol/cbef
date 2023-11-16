@@ -72,5 +72,5 @@ func FillStringFromEnvironment(s string) string {
 		return s
 	}
 
-	return ""
+	return s
 }
