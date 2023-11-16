@@ -84,8 +84,10 @@ docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:latest-amd64
 
 ### GitLab
 Just open a new repository and copy the examples folder.
+
 The structure in `examples/.gitlab-ci.yml` will help you deploy your eventing function.
-You can store secrets as masked and protected in ci/cd variables.
+
+Also, you can store cluster connection  secrets as masked and protected in ci/cd variables.
 
 ## Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
