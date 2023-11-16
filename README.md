@@ -75,12 +75,12 @@ go run ./cmd
 ### Docker
 Pull latest image
 ```bash
-docker pull ghcr.io/trendyol/cbef:latest-amd64
+docker pull ghcr.io/trendyol/cbef:1.0.1-amd64
 ```
 
 Run latest image
 ```bash
-docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:latest-amd64
+docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:1.0.1-amd64
 ```
 > Note: All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
 

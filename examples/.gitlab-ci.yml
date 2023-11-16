@@ -16,7 +16,7 @@ Prepare:
 
       Deploy:
         image:
-          name: ghcr.io/trendyol/cbef:latest-amd64
+          name: ghcr.io/trendyol/cbef:1.0.1-amd64
         stage: Deploy
         when: manual
         parallel:
