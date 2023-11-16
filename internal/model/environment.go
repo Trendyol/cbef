@@ -11,7 +11,6 @@ import (
 // Environment represents application configurations.
 type Environment struct {
 	ConfigFile       string
-	FunctionFile     string
 	ExecutionTimeout time.Duration
 	CommitAuthor     string
 }
@@ -33,7 +32,6 @@ func NewEnvironment() (*Environment, error) {
 // fill fills and validates Environment struct via environment variables.
 func (e *Environment) fill() error {
 	e.ConfigFile = os.Getenv("CONFIG_FILE")
-	e.FunctionFile = os.Getenv("FUNCTION_FILE")
 	e.CommitAuthor = os.Getenv("CI_COMMIT_AUTHOR")
 	timeout := os.Getenv("EXECUTION_TIMEOUT")
 
@@ -55,10 +53,6 @@ func (e *Environment) fill() error {
 func (e *Environment) validate() error {
 	if len(e.ConfigFile) == 0 {
 		return errors.New("environment variable 'CONFIG_FILE' does not provided")
-	}
-
-	if len(e.FunctionFile) == 0 {
-		return errors.New("environment variable 'FUNCTION_FILE' does not provided")
 	}
 
 	if len(e.CommitAuthor) == 0 {

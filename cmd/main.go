@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/trendyol/cbef/internal/action"
@@ -40,7 +41,7 @@ func main() {
 		log.Fatal(err.Error()) //nolint:gocritic
 	}
 
-	code, err := os.ReadFile(env.FunctionFile)
+	code, err := os.ReadFile(filepath.Join(filepath.Dir(env.ConfigFile), f.Name+".js"))
 	if err != nil {
 		log.Fatal("failed to read function file", "error", err.Error())
 	}
