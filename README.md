@@ -6,7 +6,7 @@
 
 `cbef` is a simple, gitops and testing capability provider for [Couchbase eventing functions](https://www.couchbase.com/products/eventing/).
 
-![cbef](https://github.com/Trendyol/cbef/assets/81802983/5791968b-0870-42a5-9030-fd2f24889d01)
+![cbef](https://github.com/Trendyol/cbef/assets/81802983/46290103-729b-4b25-a1df-af5773f0993b)
 
 ## Table of Contents
 - [Why?](#why)
