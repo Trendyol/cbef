@@ -4,7 +4,7 @@
 [![Test Coverage](https://codecov.io/gh/Trendyol/cbef/branch/main/graph/badge.svg)](https://codecov.io/gh/Trendyol/cbef)
 [![Tag Push](https://github.com/Trendyol/cbef/actions/workflows/tag-push.yml/badge.svg)](https://github.com/Trendyol/cbef/actions/workflows/tag-push.yml)
 
-`cbef` is a simple, gitops provider for [Couchbase eventing functions](https://www.couchbase.com/products/eventing/).
+`cbef` is a simple, gitops capability provider for [Couchbase eventing functions](https://www.couchbase.com/products/eventing/).
 
 ![cbef](https://github.com/Trendyol/cbef/assets/81802983/46290103-729b-4b25-a1df-af5773f0993b)
 
