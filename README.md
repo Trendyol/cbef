@@ -11,6 +11,7 @@
 - [Quickstart](#quickstart)
   - [Local](#local)
   - [Docker](#docker)
+  - [GitLab](#gitlab)
 - [Function Configurations](#function-configurations)
 
 ## Why?
@@ -80,6 +81,11 @@ Run latest image
 docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:latest-amd64
 ```
 > Note: All images available in the [packages](https://github.com/Trendyol/cbef/pkgs/container/cbef) page.
+
+### GitLab
+Just open a new repository and copy the examples folder.
+The structure in `examples/.gitlab-ci.yml` will help you deploy your eventing function.
+You can store secrets as masked and protected in ci/cd variables.
 
 ## Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
