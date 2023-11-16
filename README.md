@@ -58,11 +58,6 @@ Set the environment variable `CONFIG_FILE` to the path of the `basic.json` confi
 export CONFIG_FILE=./examples/functions/basic.json
 ```
 
-Set the environment variable `FUNCTION_FILE` to the path of the `basic.js` JavaScript file
-```bash
-export FUNCTION_FILE=./examples/functions/basic.js
-```
-
 Set the environment variable `CI_COMMIT_SHORT_SHA` to the value `foo`, representing a short SHA identifier
 ```bash
 export CI_COMMIT_SHORT_SHA=foo

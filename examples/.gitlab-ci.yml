@@ -3,12 +3,12 @@ stages:
   - Deploy
 
 variables:
-  PROJECTS: ''
+  FUNCTIONS: ''
 
 Prepare:
   stage: Prepare
   script:
-    - PROJECTS='['$(ls functions/*.json | xargs -n 1 basename | sed 's/\.json$//' | awk '{printf "\"%s\",", $0}' | sed 's/,$//')']'
+    - FUNCTIONS='['$(ls functions/*.json | xargs -n 1 basename | sed 's/\.json$//' | awk '{printf "\"%s\",", $0}' | sed 's/,$//')']'
     - |
       cat << EOF > template.gitlab-ci.yml
       stages:
@@ -21,13 +21,13 @@ Prepare:
         when: manual
         parallel:
           matrix:
-            - PROJECT: ${PROJECTS}
+            - FUNCTION: ${FUNCTIONS}
         script:
           - ln -s /cbef \${CI_PROJECT_DIR}/cbef
-          - export CONFIG_FILE=./functions/\${PROJECT}.json
-          - export FUNCTION_FILE=./functions/\${PROJECT}.js
+          - export CONFIG_FILE=./functions/\${FUNCTION}.json
           - export EXECUTION_TIMEOUT=3m
           - ./cbef
+
       EOF
 
   artifacts:
