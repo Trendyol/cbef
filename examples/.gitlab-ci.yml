@@ -25,7 +25,6 @@ Prepare:
         script:
           - ln -s /cbef \${CI_PROJECT_DIR}/cbef
           - export CONFIG_FILE=./functions/\${FUNCTION}.json
-          - export EXECUTION_TIMEOUT=3m
           - ./cbef
 
       EOF

@@ -1,0 +1,18 @@
+{
+	"name": "withvariable",
+	"cluster": {
+		"connection_string": "{{FOO_ENV_VAR}}",
+		"user": "{{BAR_ENV_VAR}}",
+		"pass": "{{ANY_ENV_VAR}}"
+	},
+	"source_keyspace": {
+		"bucket": "foo",
+		"scope": "_default",
+		"collection": "_default"
+	},
+	"metadata_keyspace": {
+		"bucket": "bar",
+		"scope": "_default",
+		"collection": "_default"
+	}
+}

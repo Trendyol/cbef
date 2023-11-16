@@ -1,7 +1,7 @@
 {
   "name": "basic",
   "cluster": {
-    "connection_string": "couchbase://localhost",
+    "connection_string": "localhost",
     "user": "foo",
     "pass": "bar"
   },

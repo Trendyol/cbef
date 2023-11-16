@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	connectTimeout   = 5 * time.Second
+	executionTimeout = 3 * time.Minute
 	processTimeout   = 10 * time.Second
 	codeAuditComment = "// Created by %s on %s via github.com/trendyol/cbef.\n\n%s"
 )
@@ -25,20 +25,20 @@ func main() {
 
 	env, err := model.NewEnvironment()
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("failed to load environment", "error", err.Error())
 	}
 
 	f, err := config.Parse(env.ConfigFile)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("failed to parse config file", "error", err.Error())
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), env.ExecutionTimeout)
+	ctx, cancel := context.WithTimeout(context.Background(), executionTimeout)
 	defer cancel()
 
-	cluster, err := couchbase.Connect(ctx, connectTimeout, f.Cluster)
+	cluster, err := couchbase.Connect(ctx, processTimeout, f.Cluster)
 	if err != nil {
-		log.Fatal(err.Error()) //nolint:gocritic
+		log.Fatal("failed to connect couchbase", "error", err.Error()) //nolint:gocritic
 	}
 
 	code, err := os.ReadFile(filepath.Join(filepath.Dir(env.ConfigFile), f.Name+".js"))
@@ -62,6 +62,6 @@ func main() {
 	}
 
 	if err = act.Upsert(ctx, f); err != nil {
-		log.Fatal("failed to upsert function", "error", err.Error(), "function", f.Name)
+		log.Fatal("failed to upsert function", "error", err.Error())
 	}
 }

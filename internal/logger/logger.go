@@ -22,6 +22,6 @@ func New() *Logger {
 
 // Fatal logs fatal reasons with exit.
 func (l *Logger) Fatal(msg string, args ...any) {
-	l.Error(msg, args) //nolint:all
+	l.Error(msg, args...)
 	os.Exit(1)
 }

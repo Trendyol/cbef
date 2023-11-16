@@ -1,0 +1,85 @@
+{
+  "name": "advanced",
+  "cluster": {
+    "connection_string": "localhost",
+    "user": "foo",
+    "pass": "bar"
+  },
+  "source_keyspace": {
+    "bucket": "foo",
+    "scope": "_default",
+    "collection": "_default"
+  },
+  "metadata_keyspace": {
+    "bucket": "bar",
+    "scope": "_default",
+    "collection": "_default"
+  },
+	"bucket_bindings": [
+		{
+			"alias": "foobucket",
+			"bucket": "foobucket",
+			"scope": "fooscope",
+			"collection": "foocollection",
+			"access": "rw"
+		},
+		{
+			"alias": "barbucket",
+			"bucket": "barbucket",
+			"scope": "barscope",
+			"collection": "barcollection",
+			"access": "r"
+		}
+	],
+	"url_bindings": [
+		{
+			"hostname": "https://www.trendyol.com",
+			"alias": "trendyol",
+			"allow_cookies": true,
+			"validate_ssl_certificate": true,
+			"auth": {
+				"type": "basic",
+				"user": "foo",
+				"pass": "bar"
+			}
+		},
+		{
+			"hostname": "https://github.com",
+			"alias": "github",
+			"allow_cookies": true,
+			"validate_ssl_certificate": true,
+			"auth": {
+				"type": "digest",
+				"user": "foo",
+				"pass": "bar"
+			}
+		},
+		{
+			"hostname": "https://www.google.com",
+			"alias": "google",
+			"allow_cookies": true,
+			"validate_ssl_certificate": true,
+			"auth": {
+				"type": "bearer",
+				"token": "foo",
+				"pass": "bar"
+			}
+		}
+	],
+	"constant_bindings": [
+		{
+			"alias": "foo",
+			"literal": "bar"
+		}
+	],
+	"settings": {
+		"dcp_stream_boundary": "from_now",
+		"description": "foo",
+		"log_level": "TRACE",
+		"query_consistency": 2,
+		"worker_count": 5,
+		"language_compatibility": "6.6.2",
+		"execution_timeout": 60,
+		"timer_context_size": 1024
+	}
+}

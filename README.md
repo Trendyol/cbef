@@ -41,6 +41,7 @@ Update function settings
 ```bash
 nano ./examples/functions/basic.json
 ```
+> Note: JavaScript eventing code file is found automatically.
 
 Update function file
 ```bash
@@ -58,19 +59,9 @@ Set the environment variable `CONFIG_FILE` to the path of the `basic.json` confi
 export CONFIG_FILE=./examples/functions/basic.json
 ```
 
-Set the environment variable `CI_COMMIT_SHORT_SHA` to the value `foo`, representing a short SHA identifier
-```bash
-export CI_COMMIT_SHORT_SHA=foo
-```
-
 Set the environment variable `CI_COMMIT_AUTHOR` to the value `foo`, representing the author of the commit
 ```bash
 export CI_COMMIT_AUTHOR=foo
-```
-
-Set the environment variable `EXECUTION_TIMEOUT` to `3m`, representing a timeout of 3 minutes
-```bash
-export EXECUTION_TIMEOUT=3m
 ```
 
 Run the Go program located in the `cmd` directory
@@ -93,46 +84,46 @@ docker run --platform=linux/amd64 ghcr.io/trendyol/cbef:latest-amd64
 ## Function Configurations
 > Configurations that can be used in files with `.json` extension located in the functions folder
 
-| Field                                    | Description                                                  |  Value Type  | Required | Options                            |
-|------------------------------------------|--------------------------------------------------------------|:------------:|:--------:|------------------------------------|
-| cluster                                  | Couchbase connection configurations                          |    object    |    ✅     |                                    |
-| cluster.connection_string                | Couchbase cluster connection string                          |    string    |    ✅     |                                    |
-| cluster.user                             | Username for cluster authentication                          |    string    |    ✅     |                                    |
-| cluster.pass                             | Password for cluster authentication                          |    string    |    ✅     |                                    |
-| name                                     | Function name                                                |    string    |    ✅     |                                    |
-| metadata_keyspace                        | Metadata keyspace configurations                             |    object    |    ✅     |                                    |
-| metadata_keyspace.bucket                 | Metadata bucket name                                         |    string    |    ✅     |                                    |
-| metadata_keyspace.scope                  | Metadata scope name                                          |    string    |    ✅     |                                    |
-| metadata_keyspace.collection             | Metadata collection name                                     |    string    |    ✅     |                                    |
-| source_keyspace                          | Source keyspace configurations                               |    object    |    ✅     |                                    |
-| source_keyspace.bucket                   | Source bucket name                                           |    string    |    ✅     |                                    |
-| source_keyspace.scope                    | Source scope name                                            |    string    |    ✅     |                                    |
-| source_keyspace.collection               | Source collection name                                       |    string    |    ✅     |                                    |
-| bucket_bindings                          | Bucket bindings configurations                               | object array |    ❌     |                                    |
-| bucket_bindings.alias                    | Alias for bucket binding                                     |    string    |    ❌     |                                    |
-| bucket_bindings.bucket                   | Target bucket name for binding                               |    string    |    ❌     |                                    |
-| bucket_bindings.scope                    | Target scope name for binding                                |    string    |    ❌     |                                    |
-| bucket_bindings.collection               | Target collection name for binding                           |    string    |    ❌     |                                    |
-| bucket_bindings.access                   | Access level for binding                                     |    string    |    ❌     | r (read-only), rw (read-write)     |
-| url_bindings                             | URL bindings configurations                                  | object array |    ❌     |                                    |
-| bucket_bindings.hostname                 | Hostname for URL binding                                     |    string    |    ❌     |                                    |
-| bucket_bindings.alias                    | Alias for URL binding                                        |    string    |    ❌     |                                    |
-| bucket_bindings.allow_cookies            | Allow cookies for URL binding                                |     bool     |    ❌     |                                    |
-| bucket_bindings.validate_ssl_certificate | Validate SSL certificate for URL binding                     |     bool     |    ❌     |                                    |
-| bucket_bindings.auth                     | Authentication configurations for URL binding                |    object    |    ❌     |                                    |
-| bucket_bindings.auth.type                | Authentication type for URL binding                          |    string    |    ❌     | basic, digest, bearer              |
-| bucket_bindings.auth.user                | Username for URL binding authentication                      |    string    |    ❌     |                                    |
-| bucket_bindings.auth.pass                | Password for URL binding authentication                      |    string    |    ❌     |                                    |
-| bucket_bindings.auth.token               | Token for URL binding authentication                         |    string    |    ❌     |                                    |
-| constant_bindings                        | Constant bindings configurations                             | object array |    ❌     |                                    |
-| constant_bindings.alias                  | Alias for constant binding                                   |    string    |    ❌     |                                    |
-| constant_bindings.literal                | Literal value for constant binding                           |    string    |    ❌     |                                    |
-| settings                                 | Function configurations                                      |    object    |    ❌     |                                    |
-| settings.dcp_stream_boundary             | The preferred deployment time feed boundary for the function |    string    |    ❌     | everything, from_now               |
-| settings.description                     | Description for function                                     |    string    |    ❌     |                                    |
-| settings.log_level                       | Granularity of system events being captured in the log       |    string    |    ❌     | INFO, ERROR, WARNING, DEBUG, TRACE |
-| settings.query_consistency               | Consistency level of N1QL statements in the function         |     uint     |    ❌     | 1 (NotBounded), 2 (RequestPlus)    |
-| settings.worker_count                    | Number of workers per node to process the events             |     uint     |    ❌     |                                    |
-| settings.language_compatibility          | Language compatibility of the function                       |    string    |    ❌     | 6.0.0, 6.5.0, 6.6.2                |
-| settings.execution_timeout               | Time after which the function's execution will be timed out  |     uint     |    ❌     |                                    |
-| settings.timer_context_size              | Maximum allowed value of the timer context size in bytes     |     uint     |    ❌     |                                    |
+| Field                                    | Description                                                  |   Value Type   | Required | Options                            |
+|------------------------------------------|--------------------------------------------------------------|:--------------:|:--------:|------------------------------------|
+| cluster                                  | Couchbase connection configurations                          |     object     |    ✅     |                                    |
+| cluster.connection_string                | Couchbase cluster connection string                          |     string     |    ✅     | env supported with {{ENV}}         |
+| cluster.user                             | Username for cluster authentication                          |     string     |    ✅     | env supported with {{ENV}}         |
+| cluster.pass                             | Password for cluster authentication                          |     string     |    ✅     | env supported with {{ENV}}         |
+| name                                     | Function name                                                |     string     |    ✅     |                                    |
+| metadata_keyspace                        | Metadata keyspace configurations                             |     object     |    ✅     |                                    |
+| metadata_keyspace.bucket                 | Metadata bucket name                                         |     string     |    ✅     |                                    |
+| metadata_keyspace.scope                  | Metadata scope name                                          |     string     |    ✅     |                                    |
+| metadata_keyspace.collection             | Metadata collection name                                     |     string     |    ✅     |                                    |
+| source_keyspace                          | Source keyspace configurations                               |     object     |    ✅     |                                    |
+| source_keyspace.bucket                   | Source bucket name                                           |     string     |    ✅     |                                    |
+| source_keyspace.scope                    | Source scope name                                            |     string     |    ✅     |                                    |
+| source_keyspace.collection               | Source collection name                                       |     string     |    ✅     |                                    |
+| bucket_bindings                          | Bucket bindings configurations                               |  object array  |    ❌     |                                    |
+| bucket_bindings.alias                    | Alias for bucket binding                                     |     string     |    ❌     |                                    |
+| bucket_bindings.bucket                   | Target bucket name for binding                               |     string     |    ❌     |                                    |
+| bucket_bindings.scope                    | Target scope name for binding                                |     string     |    ❌     |                                    |
+| bucket_bindings.collection               | Target collection name for binding                           |     string     |    ❌     |                                    |
+| bucket_bindings.access                   | Access level for binding                                     |     string     |    ❌     | r (read-only), rw (read-write)     |
+| url_bindings                             | URL bindings configurations                                  |  object array  |    ❌     |                                    |
+| bucket_bindings.hostname                 | Hostname for URL binding                                     |     string     |    ❌     |                                    |
+| bucket_bindings.alias                    | Alias for URL binding                                        |     string     |    ❌     |                                    |
+| bucket_bindings.allow_cookies            | Allow cookies for URL binding                                |      bool      |    ❌     |                                    |
+| bucket_bindings.validate_ssl_certificate | Validate SSL certificate for URL binding                     |      bool      |    ❌     |                                    |
+| bucket_bindings.auth                     | Authentication configurations for URL binding                |     object     |    ❌     |                                    |
+| bucket_bindings.auth.type                | Authentication type for URL binding                          |     string     |    ❌     | basic, digest, bearer              |
+| bucket_bindings.auth.user                | Username for URL binding authentication                      |     string     |    ❌     |                                    |
+| bucket_bindings.auth.pass                | Password for URL binding authentication                      |     string     |    ❌     |                                    |
+| bucket_bindings.auth.token               | Token for URL binding authentication                         |     string     |    ❌     |                                    |
+| constant_bindings                        | Constant bindings configurations                             |  object array  |    ❌     |                                    |
+| constant_bindings.alias                  | Alias for constant binding                                   |     string     |    ❌     |                                    |
+| constant_bindings.literal                | Literal value for constant binding                           |     string     |    ❌     |                                    |
+| settings                                 | Function configurations                                      |     object     |    ❌     |                                    |
+| settings.dcp_stream_boundary             | The preferred deployment time feed boundary for the function |     string     |    ❌     | everything, from_now               |
+| settings.description                     | Description for function                                     |     string     |    ❌     |                                    |
+| settings.log_level                       | Granularity of system events being captured in the log       |     string     |    ❌     | INFO, ERROR, WARNING, DEBUG, TRACE |
+| settings.query_consistency               | Consistency level of N1QL statements in the function         |      uint      |    ❌     | 1 (NotBounded), 2 (RequestPlus)    |
+| settings.worker_count                    | Number of workers per node to process the events             |      uint      |    ❌     |                                    |
+| settings.language_compatibility          | Language compatibility of the function                       |     string     |    ❌     | 6.0.0, 6.5.0, 6.6.2                |
+| settings.execution_timeout               | Time after which the function's execution will be timed out  | uint (seconds) |    ❌     |                                    |
+| settings.timer_context_size              | Maximum allowed value of the timer context size in bytes     |      uint      |    ❌     |                                    |

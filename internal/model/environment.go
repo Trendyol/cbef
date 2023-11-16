@@ -5,48 +5,25 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 )
 
 // Environment represents application configurations.
 type Environment struct {
-	ConfigFile       string
-	ExecutionTimeout time.Duration
-	CommitAuthor     string
+	ConfigFile   string
+	CommitAuthor string
 }
 
 // NewEnvironment creates a Environment struct via environment vriables.
 func NewEnvironment() (*Environment, error) {
-	e := &Environment{}
-	if err := e.fill(); err != nil {
-		return nil, fmt.Errorf("fill environment variables: %s", err.Error())
-	}
+	var e Environment
+	e.ConfigFile = os.Getenv("CONFIG_FILE")
+	e.CommitAuthor = os.Getenv("CI_COMMIT_AUTHOR")
 
 	if err := e.validate(); err != nil {
 		return nil, fmt.Errorf("validate environment variables: %s", err.Error())
 	}
 
-	return e, nil
-}
-
-// fill fills and validates Environment struct via environment variables.
-func (e *Environment) fill() error {
-	e.ConfigFile = os.Getenv("CONFIG_FILE")
-	e.CommitAuthor = os.Getenv("CI_COMMIT_AUTHOR")
-	timeout := os.Getenv("EXECUTION_TIMEOUT")
-
-	if len(timeout) == 0 {
-		timeout = "3m"
-	}
-
-	t, err := time.ParseDuration(timeout)
-	if err != nil {
-		return fmt.Errorf("failed to parse execution timeout duration: %w", err)
-	}
-
-	e.ExecutionTimeout = t
-
-	return nil
+	return &e, nil
 }
 
 // validate validates provided environment variable requirements.
