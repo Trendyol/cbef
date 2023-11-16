@@ -39,7 +39,6 @@ dockers:
   - use: buildx
     image_templates:
       - "ghcr.io/trendyol/{{ .ProjectName }}:{{ .Version }}-amd64"
-      - "ghcr.io/trendyol/{{ .ProjectName }}:latest-amd64"
     dockerfile: ./build/docker/Dockerfile.goreleaser
     goos: linux
     goarch: amd64
