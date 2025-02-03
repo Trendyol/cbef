@@ -1,3 +1,5 @@
+
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Trendyol/cbef/badge)](https://scorecard.dev/viewer/?uri=github.com/Trendyol/cbef)
 ## cbef (Couchbase Eventing Functions)
 [![Release](https://img.shields.io/github/v/release/Trendyol/cbef?sort=semver)](https://github.com/Trendyol/cbef/releases)
 [![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/Trendyol/cbef)
